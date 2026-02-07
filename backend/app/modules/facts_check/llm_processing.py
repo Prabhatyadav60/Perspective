@@ -144,7 +144,13 @@ def run_fact_verifier_sdk(search_results):
                 parsed = json.loads(content)
             except Exception as parse_err:
                 logger.error(f"LLM JSON parse error: {parse_err}")
-
+             parsed = {
+                    "verdict": "Unknown",
+                    "explanation": f"Parse error: {parse_err}",
+                    "original_claim": claim,
+                    "source_link": source,
+                }
+            
             results_list.append(parsed)
 
         return {
